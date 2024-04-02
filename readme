@@ -1,0 +1,46 @@
+# Wiggle Challenge
+
+## Overview
+
+The Wiggle Challenge is a web application built with Vue.js for the frontend and Laravel for the backend, leveraging a RESTful architecture. This project aims to showcase a practical implementation of these technologies to solve a specific challenge. The choice of Vue.js and Laravel was driven by their ease of use and the developer's familiarity with them, which was crucial given the project's tight timeline.
+
+## Technologies
+
+- **Frontend:** Vue.js
+- **Backend:** Laravel (RESTful API)
+
+## Features
+
+List the key features of your project. For example:
+- Create groups
+- Create users
+- Attach users to a group
+
+## Getting Started
+
+These instructions will help you get a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+What you need to install the software:
+
+- PHP >= 8.1.27 
+- Composer
+- Node.js and npm
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/aubchahid/challenge.git
+
+
+2. CD backend
+
+3. composer install
+
+4. php artisan migrate
+
+5. CD ../frontend
+
+6. npm i
