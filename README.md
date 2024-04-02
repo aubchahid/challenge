@@ -62,6 +62,9 @@ What you need to install the software:
      ```bash 
      npm run dev
 
+### Note 
+All the logging for the action on Users or Groups has made via the observers 
+
 
 ### What to Do If I Have More Time?
 #### Improve Project Structure for Better Maintainability
