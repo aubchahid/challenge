@@ -1,40 +1,29 @@
-# Use the official PHP image with Apache
-FROM php:8.0-apache
+# Laravel Dockerfile
+FROM php:8.1-apache
 
-# Install system dependencies
+# Install system dependencies and PHP extensions
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
     zip \
     curl \
-    unzip \
     git \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
-
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+    unzip \
+    libzip-dev \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
 # Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Set working directory
-WORKDIR /var/www
-
-# Remove default server definition
-RUN a2dissite 000-default.conf
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
+# Set the working directory
+WORKDIR /var/www/html
 
 # Copy existing application directory contents
-COPY . /var/www
+COPY . /var/www/html
 
-# Copy apache configuration
-COPY ./docker/apache.conf /etc/apache2/sites-available/000-default.conf
+# Install any application dependencies
+RUN composer install
 
-# Copy entrypoint script and make it executable
-COPY ./docker/entrypoint.sh /usr/local/bin/start-container
-RUN chmod +x /usr/local/bin/start-container
-
-ENTRYPOINT ["start-container"]
-CMD ["apache2-foreground"]
+# Expose port 8000 and start apache server
+EXPOSE 81

@@ -4,17 +4,29 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    image: backend
+    container_name: backend
     ports:
-      - "8080:80"
-    restart: unless-stopped
-    tty: true
- 
+      - "81:8000"
+    volumes:
+      - ./backend:/var/www/html
+
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    image: frontend
+    container_name: frontend
     ports:
-      - "5100:80"
+      - "8080:80"
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
 
 volumes:
-  db_data:
+  mongodb_data:

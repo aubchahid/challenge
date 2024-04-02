@@ -18,9 +18,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'birthdate',
+        'phone_number',
+        'address',
+        'city',
+        'profile_picture',
+        'token',
     ];
 
     /**
@@ -42,4 +49,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'model_has_group', 'user_id', 'group_id');
+    }
 }
